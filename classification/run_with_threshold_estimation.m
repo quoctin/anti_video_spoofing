@@ -11,17 +11,14 @@ function run_with_threshold_estimation(data_train, labels_train, data_test, labe
 %   label = -1 for attacks, 1 for real access.
 %   kernel: SVM kernel (5 is Histogram Intersection Kernel).
 
-    data_train_bk = data_train;
-    data_labels_bk = labels_train;
+	pos_inds = find((labels_train == 1));
+	neg_inds = find((labels_train == -1));
 
-    indx = randperm(size(data_train_bk,1));
-    data_train = data_train_bk(indx, :);
-    labels_train = data_labels_bk(indx);
-    ndevel = 300;
-    data_devel = data_train(1:ndevel, :);
-    labels_devel = labels_train(1:ndevel);
-    data_train(1:ndevel, :) = [];
-    labels_train(1:ndevel) = [];
+	data_devel = data_train([pos_inds(1:30); neg_inds(1:270)], :);
+	labels_devel = labels_train([pos_inds(1:30); neg_inds(1:270)]);
+    
+	data_train([pos_inds(1:30); neg_inds(1:270)], :) = [];
+	labels_train([pos_inds(1:30); neg_inds(1:270)]) = [];
 
     % find best c and g
     if kernel == 2
