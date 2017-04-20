@@ -13,10 +13,9 @@ function run_with_threshold_estimation(data_train, labels_train, data_test, labe
 
 	pos_inds = find((labels_train == 1));
 	neg_inds = find((labels_train == -1));
-
 	data_devel = data_train([pos_inds(1:30); neg_inds(1:270)], :);
 	labels_devel = labels_train([pos_inds(1:30); neg_inds(1:270)]);
-    
+	
 	data_train([pos_inds(1:30); neg_inds(1:270)], :) = [];
 	labels_train([pos_inds(1:30); neg_inds(1:270)]) = [];
 
