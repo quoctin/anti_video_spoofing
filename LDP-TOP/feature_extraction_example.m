@@ -38,7 +38,7 @@ for i = 1:length(files)
     file_list = [file_list; list];
 end
 
-neg_label = ones(size(file_list,1));
+neg_labels = -1*ones(size(file_list,1));
 neg_features = zeros(size(file_list, 1), feature_dim);
 for f = file_list'
     data = read_video(f);
@@ -46,5 +46,5 @@ for f = file_list'
 end
 
 %:::::::::::::::::::::::::::::::TRAIN-DATA::::::::::::::::::::::::::::::::%
-features = [pos_features; neg_features];
-labels = [pos_labels; neg_labels];
+data_train = [pos_features; neg_features];
+labels_train = [pos_labels; neg_labels];

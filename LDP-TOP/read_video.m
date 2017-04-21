@@ -3,6 +3,9 @@
 function data = read_video(path)
 %   This function reads video and return a 3D matrix
 %   path: video file path
+    if iscell(path)
+        path = cell2mat(path);
+    end
     V = VideoReader(path);
     maxNumFrame = 400; % suppose that 400 is enough for buffering
     data = zeros(V.height, V.width, maxNumFrame);

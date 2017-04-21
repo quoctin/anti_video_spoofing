@@ -5,7 +5,7 @@ function list = read_file_list(path)
 %   path: file path
 
     fileID = fopen(path);
-    cell = textscan(fileID, '%s');
+    cell = textscan(fileID, '%s', 'EndOfLine', '\n', 'Whitespace', '\t');
     fclose(fileID);
     list = cell{:};
 end
